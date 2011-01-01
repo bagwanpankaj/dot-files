@@ -20,6 +20,10 @@ class Object
   def local_methods
     (methods - Object.instance_methods).sort
   end
+  
+  def blank?
+    respond_to?(:empty?) ? empty? : nil?
+  end
 end
 
 # copy a string to the clipboard
