@@ -15,6 +15,16 @@ function git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/'
 }
 
+__bash_rvm_prompt_additions() {
+  if [[ -x ~/.rvm/bin/rvm-prompt ]]; then
+    local interpreter="$(~/.rvm/bin/rvm-prompt i v)"
+    [[ -n "$interpreter" ]] && echo -n "$interpreter"
+  fi
+}
+
+#simple prompt
+PS1="\W\[\033[0;32m\]\$(git_branch) \[\033[0m\]\[\033[0;32m\][\$(__bash_rvm_prompt_additions)] \[\033[0m\]\$ "
+
 #simple prompt
 #old PS1 
 # PS1="\h:\W \u\[\033[0;32m\]\$(parse_git_branch_and_add_brackets) \[\033[0m\]\$ "
